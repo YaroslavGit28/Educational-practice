@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Мои заказы</h2>
+{% for order in orders %}
+<div class="bg-white p-3 rounded mb-2">
+  <a href="{% url 'orders:detail' order.pk %}">Заказ #{{ order.pk }}</a>
+  <span class="badge status-{{ order.status.name }}">{{ order.status.name }}</span>
+  <div class="float-end d-flex align-items-center gap-2">
+    <span>{{ order.total_amount }} ₽</span>
+    {% if order.status.name != "shipped" and order.status.name != "cancelled" %}
+      <form method="post" action="{% url 'orders:cancel' order.pk %}" class="m-0" data-ajax="order-cancel">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-danger" data-confirm="Отменить заказ в один клик?">Отменить</button>
+      </form>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

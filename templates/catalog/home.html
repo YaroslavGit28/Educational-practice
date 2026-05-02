@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-4 p-md-5 rounded-4 bg-white shadow-sm mb-4">
+  <h1 class="h3 mb-2">Интернет-магазин канцтоваров</h1>
+  <p class="text-muted mb-0">Ручки, тетради, бумага и всё для учебы и офиса.</p>
+</div>
+<h2 class="h4 mb-3">Новые товары</h2>
+<div class="row g-3">
+  {% for product in products %}
+  <div class="col-12 col-md-6 col-lg-3">
+    <div class="p-3 bg-white product-card h-100 position-relative product-click" data-href="{% url 'catalog:product_detail' product.pk %}">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x400/e9edf5/2f3a4c?text=No+Photo{% endif %}" class="img-fluid rounded mb-2" alt="{{ product.name }}">
+      <h6 class="mb-1">{{ product.name }}</h6>
+      <p class="text-muted small mb-2">{{ product.category.name }}</p>
+      <p class="fw-semibold mb-2">{{ product.price }} ₽</p>
+      <div class="d-flex gap-2">
+        <form method="post" action="{% url 'cart:add' product.pk %}" class="m-0 js-stop-card">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="{% url 'orders:checkout' %}">
+          <button class="btn btn-sm btn-primary">Купить в 1 клик</button>
+        </form>
+        <form method="post" action="{% url 'cart:add' product.pk %}" class="m-0 js-stop-card">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button class="btn btn-sm btn-outline-primary">В корзину</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

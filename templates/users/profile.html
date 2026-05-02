@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="h4 mb-3">Личный кабинет</h2>
+<div class="bg-white p-4 rounded-4 shadow-sm">
+  <p class="mb-1"><b>Email:</b> {{ request.user.email }}</p>
+  <p class="mb-3"><b>Роль:</b> {{ request.user.get_role_display }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Сохранить</button>
+  </form>
+</div>
+{% endblock %}

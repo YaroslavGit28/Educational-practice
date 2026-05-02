@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Управление товарами</h2>
+<a href="{% url 'admin_panel:product_create' %}" class="btn btn-primary btn-sm mb-2">Добавить</a>
+{% for p in products %}
+<div class="bg-white p-2 rounded mb-1">{{ p.name }} — <a href="{% url 'admin_panel:product_edit' p.pk %}">Редактировать</a></div>
+{% endfor %}
+{% endblock %}

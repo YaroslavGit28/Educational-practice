@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Панель кладовщика</h2>
+{% for order in orders %}
+<div class="bg-white p-3 mb-2 rounded">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <a href="{% url 'orders:detail' order.pk %}">Заказ #{{ order.pk }}</a>
+      {% if order.user %}<span class="text-muted">({{ order.user.email }})</span>{% endif %}
+      <span class="badge status-{{ order.status.name }}">{{ order.status.name }}</span>
+    </div>
+    <div class="d-flex gap-2">
+      {% if order.status.name == "confirmed" %}
+        <form method="post" action="{% url 'processing:change_status' order.pk %}" class="m-0" data-ajax="order-status">
+          {% csrf_token %}
+          <input type="hidden" name="status" value="assembling">
+          <button class="btn btn-sm btn-warning">Начать сборку</button>
+        </form>
+      {% endif %}
+      {% if order.status.name == "assembling" %}
+        <form method="post" action="{% url 'processing:change_status' order.pk %}" class="m-0" data-ajax="order-status">
+          {% csrf_token %}
+          <input type="hidden" name="status" value="shipped">
+          <button class="btn btn-sm btn-success">Отгружен</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Отчёт по продажам</h2>
+<a href="{% url 'reports:sales_export' %}" class="btn btn-sm btn-outline-success mb-3">Экспорт Excel</a>
+<table class="table table-sm bg-white">
+  <tr><th>Дата</th><th>Заказы</th><th>Сумма</th></tr>
+  {% for date, row in sales_rows.items %}
+  <tr><td>{{ date }}</td><td>{{ row.orders }}</td><td>{{ row.amount }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
