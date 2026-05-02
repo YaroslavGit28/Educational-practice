@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Пользователи</h2>
+{% for u in users %}<div class="bg-white p-2 rounded mb-1">{{ u.email }} ({{ u.role }})</div>{% endfor %}
+{% endblock %}

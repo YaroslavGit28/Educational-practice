@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white p-4 rounded-4 shadow-sm">
+  <div class="row g-4">
+    <div class="col-12 col-md-5">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x400/e9edf5/2f3a4c?text=No+Photo{% endif %}" class="img-fluid rounded" alt="{{ product.name }}">
+    </div>
+    <div class="col-12 col-md-7">
+      <h2 class="h4">{{ product.name }}</h2>
+      <p class="text-muted">{{ product.description }}</p>
+      <p class="mb-2">Категория: <b>{{ product.category.name }}</b></p>
+      <p class="mb-2">Остаток: <b>{{ product.stock }}</b></p>
+      <p class="h5 mb-3">{{ product.price }} ₽</p>
+      <form method="post" action="{% url 'cart:add' product.pk %}" class="d-flex gap-2">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1" class="form-control" style="max-width: 110px">
+        <button class="btn btn-primary">В корзину</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

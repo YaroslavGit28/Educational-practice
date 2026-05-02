@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-7 col-lg-6">
+    <h2 class="h4 mb-3">Регистрация — шаг {{ step }} из {{ total_steps }}</h2>
+    <div class="progress mb-3" role="progressbar" aria-label="progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{% widthratio step total_steps 100 %}">
+      <div class="progress-bar" style="width: {% widthratio step total_steps 100 %}%"></div>
+    </div>
+    <form method="post" class="bg-white p-4 rounded-4 shadow-sm">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-flex justify-content-between">
+        {% if step > 1 %}
+          <a href="{% url 'users:register-step' step=step|add:'-1' %}" class="btn btn-outline-secondary">Назад</a>
+        {% else %}
+          <span></span>
+        {% endif %}
+        <button class="btn btn-primary">{% if step == total_steps %}Завершить{% else %}Далее{% endif %}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

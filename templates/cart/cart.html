@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Корзина</h2>
+{% for item in items %}
+<div class="bg-white p-3 rounded mb-2 d-flex justify-content-between" data-cart-item="{{ item.id }}">
+  <div>{{ item.product.name }} x {{ item.quantity }}</div>
+  <div class="d-flex align-items-center gap-2">
+    <span data-line-total>{{ item.total_price }} ₽</span>
+    <div class="btn-group" role="group" aria-label="quantity">
+      <form method="post" action="{% url 'cart:update' item.id %}" class="m-0 js-stop-card" data-ajax="cart-qty">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="dec">
+        <button type="submit" class="btn btn-sm btn-outline-secondary">−</button>
+      </form>
+      <span class="btn btn-sm btn-outline-secondary disabled" data-qty>{{ item.quantity }}</span>
+      <form method="post" action="{% url 'cart:update' item.id %}" class="m-0 js-stop-card" data-ajax="cart-qty">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="inc">
+        <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+      </form>
+    </div>
+    <form method="post" action="{% url 'cart:remove' item.id %}" class="m-0 js-stop-card" data-ajax="cart-remove">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-sm btn-outline-danger" data-confirm="Удалить товар из корзины?">Удалить</button>
+    </form>
+  </div>
+</div>
+{% empty %}<p>Корзина пуста</p>{% endfor %}
+<a href="{% url 'orders:checkout' %}" class="btn btn-success">Оформить заказ</a>
+{% endblock %}

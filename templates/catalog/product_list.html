@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3">Каталог</h1>
+<div class="row g-3">
+  {% for product in products %}
+  <div class="col-12 col-md-6 col-lg-3">
+    <div class="p-3 bg-white product-card h-100 position-relative product-click" data-href="{% url 'catalog:product_detail' product.pk %}">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x400/e9edf5/2f3a4c?text=No+Photo{% endif %}" class="img-fluid rounded mb-2" alt="{{ product.name }}">
+      <h6 class="mb-1">{{ product.name }}</h6>
+      <p class="text-muted small mb-2">{{ product.category.name }}</p>
+      <p class="mb-1">{{ product.price }} ₽</p>
+      <p class="small text-secondary mb-2">Остаток: {{ product.stock }}</p>
+      <div class="d-flex gap-2">
+        <form method="post" action="{% url 'cart:add' product.pk %}" class="m-0 js-stop-card">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="{% url 'orders:checkout' %}">
+          <button class="btn btn-sm btn-primary">Купить</button>
+        </form>
+        <form method="post" action="{% url 'cart:add' product.pk %}" class="m-0 js-stop-card">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <button class="btn btn-sm btn-outline-primary">В корзину</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="mt-3">
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}" class="btn btn-light">Назад</a>{% endif %}
+  <span class="mx-2">Стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}" class="btn btn-light">Вперёд</a>{% endif %}
+</div>
+{% endblock %}

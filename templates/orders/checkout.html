@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="h4 mb-3">Оформление заказа</h2>
+<form method="post" class="bg-white p-4 rounded-4 shadow-sm">
+  {% csrf_token %}
+  {% if request.user.is_authenticated %}
+    <div class="alert alert-info">Вы авторизованы. Контактные данные будут подставлены из профиля.</div>
+  {% else %}
+    <p class="text-muted">Для оформления без регистрации укажите ФИО, телефон и адрес доставки.</p>
+  {% endif %}
+  {{ form.as_p }}
+  <button class="btn btn-primary">Подтвердить</button>
+</form>
+{% endblock %}
