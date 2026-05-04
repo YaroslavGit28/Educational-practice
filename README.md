@@ -172,27 +172,6 @@ internet_magazin/
 | `DB_HOST` | Хост БД (для PostgreSQL) | `localhost` |
 | `DB_PORT` | Порт БД (для PostgreSQL) | `5432` |
 
-### Использование с PostgreSQL
-
-1. Установите PostgreSQL и создайте базу данных
-2. В файле `.env` установите:
-```env
-DB_ENGINE=postgres
-DB_NAME=internet_magazin
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-```
-3. Установите адаптер PostgreSQL:
-```bash
-pip install psycopg2-binary
-```
-4. Выполните миграции:
-```bash
-python manage.py migrate
-```
-
 ## Модели данных
 
 ### Основные сущности
