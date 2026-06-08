@@ -1,0 +1,6 @@
+УП.03 этап 6: CI/CD, исправление инцидента, релиз v0.1.1
+
+- GitHub Actions CI workflow
+- Исправлен редирект после login с параметром next
+- CHANGELOG, RELEASE_NOTES, INCIDENT_REPORT
+- release-check скрипт

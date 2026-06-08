@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказ #{{ order.id }} - Канцтовары{% endblock %}
+
+{% block content %}
+<h1>Заказ #{{ order.id }}</h1>
+<p class="text-muted">{{ order.created_at|date:"d.m.Y H:i" }}</p>
+<p><span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span></p>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Состав заказа</div>
+            <table class="table mb-0">
+                <thead>
+                    <tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Сумма</th></tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.price }} ₽</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.get_total }} ₽</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Итого:</strong></td>
+                        <td><strong>{{ order.total_amount }} ₽</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Доставка</div>
+            <div class="card-body">
+                <p><strong>Адрес:</strong><br>{{ order.delivery_address }}</p>
+                <p><strong>Телефон:</strong> {{ order.phone }}</p>
+                {% if order.comment %}
+                    <p><strong>Комментарий:</strong><br>{{ order.comment }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'orders:order_history' %}" class="btn btn-outline-secondary mt-3">← К списку заказов</a>
+    </div>
+</div>
+{% endblock %}

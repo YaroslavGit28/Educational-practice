@@ -1,0 +1,1 @@
+﻿GET /api/health/ -> 200 {"status": "ok", "service": "internet_magazin", "version": "0.1.1"}

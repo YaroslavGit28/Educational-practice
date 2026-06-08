@@ -1,0 +1,5 @@
+УП.03 этап 4: тестирование и качество
+
+- Автотесты tests/ (smoke, api)
+- TEST_PLAN, DEFECT_LOG, RISK_REGISTER, API_TEST_REPORT
+- Скрипты test, api-test, quality-check, performance

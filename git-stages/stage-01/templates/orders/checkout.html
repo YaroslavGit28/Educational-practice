@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа - Канцтовары{% endblock %}
+
+{% block content %}
+<h1>Оформление заказа</h1>
+<div class="row mt-4">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">Данные доставки</div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Адрес доставки</label>
+                        <textarea name="delivery_address" class="form-control" rows="3" required>{{ user.address }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телефон</label>
+                        <input type="text" name="phone" class="form-control" value="{{ user.phone }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Комментарий к заказу</label>
+                        <textarea name="comment" class="form-control" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">Ваш заказ</div>
+            <ul class="list-group list-group-flush">
+                {% for item in cart_items %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                        <span>{{ item.get_total }} ₽</span>
+                    </li>
+                {% endfor %}
+                <li class="list-group-item d-flex justify-content-between fw-bold">
+                    <span>Итого</span>
+                    <span>{{ total }} ₽</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, support/**]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Django check and test
+        run: |
+          mkdir -p logs backups
+          python manage.py check
+          python manage.py migrate --noinput
+          python manage.py test tests --verbosity=1
+          python -m compileall apps magazin tests

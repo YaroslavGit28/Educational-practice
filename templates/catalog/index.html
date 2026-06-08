@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Канцтовары{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+            <h1 class="display-4">Добро пожаловать в магазин канцтоваров!</h1>
+            <p class="lead">Широкий ассортимент ручек, тетрадей, бумаги и других канцелярских товаров</p>
+            <hr class="my-4">
+            <p>Быстрая доставка и доступные цены</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'catalog:catalog' %}" role="button">Перейти в каталог</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h2>Популярные товары</h2>
+        <div class="row mt-3">
+            {% for product in products %}
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                                Нет фото
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text text-muted">{{ product.category.name }}</p>
+                            <p class="card-text"><strong>{{ product.price }} ₽</strong></p>
+                            {% if product.stock > 0 %}
+                                <span class="badge bg-success">В наличии: {{ product.stock }}</span>
+                            {% else %}
+                                <span class="badge bg-danger">Нет в наличии</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            {% if product.stock > 0 %}
+                                <form method="post" action="{% url 'cart:add_to_cart' product.id %}">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control form-control-sm d-inline w-50">
+                                    <button type="submit" class="btn btn-primary btn-sm">В корзину</button>
+                                </form>
+                            {% else %}
+                                <button class="btn btn-secondary btn-sm" disabled>Нет в наличии</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
