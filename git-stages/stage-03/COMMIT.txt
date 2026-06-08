@@ -1,5 +1,0 @@
-УП.03 этап 3: развертывание demo-стенда
-
-- docker-compose.prod.yml, env production/demo
-- DEPLOYMENT.md, DEMO_GUIDE.md, public_url.txt
-- Скрипты deploy, restart, check_deploy, build_release

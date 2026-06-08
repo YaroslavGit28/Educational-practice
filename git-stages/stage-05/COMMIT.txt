@@ -1,5 +1,0 @@
-УП.03 этап 5: безопасность и эксплуатационные риски
-
-- SECURITY.md, чеклист безопасности, backup/restore отчёт
-- Скрипты security-check, deps-check, backup, restore, ports-check
-- SECRET_KEY через .env, проверка доступа к чужим заказам

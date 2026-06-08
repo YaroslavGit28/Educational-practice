@@ -1,5 +1,0 @@
-УП.03 этап 2: инсталляция и окружение запуска
-
-- BAT-скрипты setup, run, check, format, docker-up/down
-- Dockerfile, docker-compose.yml, .dockerignore
-- Makefile, .editorconfig, pyproject.toml
