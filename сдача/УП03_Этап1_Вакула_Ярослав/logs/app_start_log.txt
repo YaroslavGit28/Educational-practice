@@ -1,0 +1,10 @@
+Django 4.2.7
+System check identified no issues (0 silenced).
+
+Found 8 test(s).
+Ran 8 tests in ~2s
+OK
+
+Server: python manage.py runserver 0.0.0.0:8000
+URL: http://127.0.0.1:8000/
+Health: http://127.0.0.1:8000/api/health/ -> {"status": "ok"}
