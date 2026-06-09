@@ -1,5 +1,5 @@
-УП.03 этап 4: тестирование и качество
+УП.03 этап 5: безопасность и эксплуатационные риски
 
-- Автотесты tests/ (smoke, api)
-- TEST_PLAN, DEFECT_LOG, RISK_REGISTER, API_TEST_REPORT
-- Скрипты test, api-test, quality-check, performance
+- SECURITY.md, чеклист безопасности, backup/restore отчёт
+- Скрипты security-check, deps-check, backup, restore, ports-check
+- SECRET_KEY через .env, проверка доступа к чужим заказам
