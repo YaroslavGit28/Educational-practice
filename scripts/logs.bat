@@ -15,3 +15,4 @@ if exist docker-compose.yml (
     docker compose logs --tail=50 2>nul
 )
 pause
+

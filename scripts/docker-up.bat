@@ -6,3 +6,4 @@ echo Запуск Docker Compose
 echo ========================================
 if not exist .env copy .env.example .env
 docker compose up --build
+

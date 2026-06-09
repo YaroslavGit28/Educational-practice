@@ -9,3 +9,4 @@ black apps magazin tests
 ruff check apps magazin tests --fix
 echo Форматирование завершено.
 pause
+
