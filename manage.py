@@ -9,8 +9,11 @@ def main():
     """Run administrative tasks."""
     base_dir = Path(__file__).resolve().parent
     sys.path.insert(0, str(base_dir / 'apps'))
+    sys.path.insert(0, str(base_dir / 'scripts'))
     (base_dir / 'logs').mkdir(exist_ok=True)
     (base_dir / 'backups').mkdir(exist_ok=True)
+    from load_env import load_env_file
+    load_env_file(base_dir / '.env')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'magazin.settings')
     try:
         from django.core.management import execute_from_command_line

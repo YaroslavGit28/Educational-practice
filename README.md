@@ -67,6 +67,15 @@ scripts\quality-check.bat
 
 См. `repo_link.txt`
 
+## Сдача УП.03
+
+Отчёты и Excel по всем 6 этапам: папка [`сдача/`](сдача/README.md)
+
+```bat
+.venv\Scripts\python.exe scripts\generate_stage1_xlsx.py
+scripts\quality-check.bat
+```
+
 ## Поэтапная загрузка в Git
 
 Папки `git-stages/stage-01` … `stage-06` — изменения по этапам УП.03 для отдельных коммитов.

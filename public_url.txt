@@ -1,1 +1,3 @@
 http://127.0.0.1:8000/
+Способ развертывания: вариант C — локальный demo-стенд через Docker (docker-compose.prod.yml).
+Для проверки: scripts\deploy.bat, scripts\check_deploy.bat.

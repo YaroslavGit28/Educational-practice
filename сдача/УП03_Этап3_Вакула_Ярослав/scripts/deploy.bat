@@ -12,12 +12,7 @@ if not exist .env.production (
     )
 )
 docker compose -f docker-compose.prod.yml up --build -d
-echo.
-echo Миграции и демо-данные (если entrypoint ещё не успел)...
-docker compose -f docker-compose.prod.yml exec -T app python manage.py migrate --noinput
-docker compose -f docker-compose.prod.yml exec -T app python manage.py load_demo_data
 docker compose -f docker-compose.prod.yml ps
 echo.
 echo Приложение: http://127.0.0.1:8000/
-echo Демо: customer@shop.ru / demo1234
 pause

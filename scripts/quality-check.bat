@@ -7,4 +7,5 @@ echo ========================================
 call scripts\test.bat
 call scripts\api-test.bat
 call scripts\logs-check.bat
-echo Проверка завершена.
+call scripts\performance.bat
+echo Проверка завершена. Отчёты в папке reports\

@@ -1,0 +1,9 @@
+[INFO] 2026-06-08 21:10:55,829 django.utils.autoreload: Watching for file changes with StatReloader
+[WARNING] 2026-06-08 21:23:00,623 django.request: Not Found: /orders/1/
+[WARNING] 2026-06-08 21:26:11,146 django.request: Not Found: /orders/1/
+[INFO] 2026-06-08 21:53:40,075 django.utils.autoreload: C:\Users\yarche\Desktop\учебная практика\internet_magazin\apps\users\views.py changed, reloading.
+[INFO] 2026-06-08 22:37:17,101 django.utils.autoreload: Watching for file changes with StatReloader
+[WARNING] 2026-06-08 22:37:46,153 django.request: Not Found: /favicon.ico
+[INFO] 2026-06-08 23:07:14,602 django.utils.autoreload: C:\Users\yarche\Desktop\учебная практика\internet_magazin\apps\users\migrations\0001_initial.py changed, reloading.
+[WARNING] 2026-06-09 10:54:57,818 django.request: Not Found: /orders/1/
+[WARNING] 2026-06-09 10:55:58,712 django.request: Not Found: /missing-page/

@@ -1,8 +1,8 @@
+from django.db import OperationalError, ProgrammingError
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import User
 from .forms import RegisterForm, ProfileForm
 
 def register(request):
@@ -22,17 +22,25 @@ def register(request):
 
 def login_view(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request, user)
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '')
+        try:
+            user = authenticate(request, email=email, password=password)
+        except (OperationalError, ProgrammingError):
+            messages.error(
+                request,
+                'База данных не готова. Выполните: python manage.py migrate && python manage.py load_demo_data',
+            )
+            return render(request, 'users/login.html')
+
+        if user is not None:
+            backend = getattr(user, 'backend', 'users.backends.EmailBackend')
+            login(request, user, backend=backend)
             next_url = request.GET.get('next')
-            if next_url:
+            if next_url and next_url.startswith('/'):
                 return redirect(next_url)
             return redirect('catalog:index')
-        else:
-            messages.error(request, 'Неверный email или пароль')
+        messages.error(request, 'Неверный email или пароль')
     return render(request, 'users/login.html')
 
 def logout_view(request):

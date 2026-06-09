@@ -16,18 +16,24 @@ class Command(BaseCommand):
             ('customer@shop.ru', 'Сидорова Анна Покупатель', 'customer', False, False),
         ]
         for email, name, role, is_super, is_staff in users_data:
-            if not User.objects.filter(email=email).exists():
-                user = User.objects.create_user(
-                    email=email,
-                    password='demo1234',
-                    full_name=name,
-                    role=role,
-                    phone='+7 (999) 000-00-00',
-                )
-                user.is_superuser = is_super
-                user.is_staff = is_staff
-                user.save()
-                self.stdout.write(f'Создан пользователь: {email} / demo1234')
+            user, created = User.objects.get_or_create(
+                email=email,
+                defaults={
+                    'full_name': name,
+                    'role': role,
+                    'phone': '+7 (999) 000-00-00',
+                },
+            )
+            user.full_name = name
+            user.role = role
+            user.phone = '+7 (999) 000-00-00'
+            user.is_superuser = is_super
+            user.is_staff = is_staff
+            user.is_active = True
+            user.set_password('demo1234')
+            user.save()
+            action = 'Создан' if created else 'Обновлён'
+            self.stdout.write(f'{action} пользователь: {email} / demo1234')
 
         categories_data = [
             ('Ручки и карандаши', 'ruchki-karandashi'),
