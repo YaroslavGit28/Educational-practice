@@ -1,5 +1,6 @@
-УП.03 этап 5: безопасность и эксплуатационные риски
+УП.03 этап 6: CI/CD, исправление инцидента, релиз v0.1.1
 
-- SECURITY.md, чеклист безопасности, backup/restore отчёт
-- Скрипты security-check, deps-check, backup, restore, ports-check
-- SECRET_KEY через .env, проверка доступа к чужим заказам
+- GitHub Actions CI workflow
+- Исправлен редирект после login с параметром next
+- CHANGELOG, RELEASE_NOTES, INCIDENT_REPORT
+- release-check скрипт
