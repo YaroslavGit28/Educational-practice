@@ -1,0 +1,18 @@
+﻿.\.venv\Scripts\python.exe : Creating test database for alias 'default'...
+C:\Users\yarche\AppData\Local\Temp\ps-script-89450537-42db-4caa-b9e7-906dd9057a7d.ps1:119 знак:75
++ ... t_magazin"; .\.venv\Scripts\python.exe manage.py test tests -v 1 2>&1 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...as 'default'...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Found 8 test(s).
+System check identified no issues (0 silenced).
+.[WARNING] 2026-06-08 21:26:11,146 django.request: Not Found: /orders/1/
+.......
+----------------------------------------------------------------------
+Ran 8 tests in 2.101s
+
+OK
+Destroying test database for alias 'default'...
+

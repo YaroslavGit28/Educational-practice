@@ -1,0 +1,12 @@
+HTTP/API checks 
+ 
+GET / 
+HTTP 200
+GET /api/health/ 
+{"status": "ok", "service": "internet_magazin", "version": "0.1.1"} 
+GET /catalog/ 
+HTTP 200
+GET /orders/99999/ (ожидается 302) 
+HTTP 302
+GET /missing-page/ (ожидается 404) 
+HTTP 404

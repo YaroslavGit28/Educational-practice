@@ -1,5 +1,5 @@
-УП.03 этап 3: развертывание demo-стенда
+УП.03 этап 4: тестирование и качество
 
-- docker-compose.prod.yml, env production/demo
-- DEPLOYMENT.md, DEMO_GUIDE.md, public_url.txt
-- Скрипты deploy, restart, check_deploy, build_release
+- Автотесты tests/ (smoke, api)
+- TEST_PLAN, DEFECT_LOG, RISK_REGISTER, API_TEST_REPORT
+- Скрипты test, api-test, quality-check, performance
