@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 from .forms import RegisterForm, ProfileForm
 
 def register(request):
@@ -36,10 +37,16 @@ def login_view(request):
         if user is not None:
             backend = getattr(user, 'backend', 'users.backends.EmailBackend')
             login(request, user, backend=backend)
-            next_url = request.GET.get('next')
+
+            # Получаем next из POST (если форма передаёт) или из GET
+            next_url = request.POST.get('next') or request.GET.get('next')
+
+            # Безопасная проверка: редиректим только на внутренние URL, начинающиеся с '/'
             if next_url and next_url.startswith('/'):
                 return redirect(next_url)
+
             return redirect('catalog:index')
+
         messages.error(request, 'Неверный email или пароль')
     return render(request, 'users/login.html')
 
